@@ -11,7 +11,7 @@ This project demonstrates how to implement a multi-tenant architecture using Spr
 - Java 17+
 - Spring Boot 3.x
 - MySQL Database
-- Maven
+- Gradle
 
 ## Configuration
 
