@@ -1,0 +1,33 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl.auto: update
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        show_sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/dev
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+multi-tenant:
+  enabled : false
+  default-data-source: perf
+  entity-packages:
+      - com.syscho.multi
+  datasources:
+    default:
+      url: jdbc:mysql://localhost:3306/dev
+      username: root
+      password: root
+    dev:
+      url: jdbc:mysql://localhost:3306/dev
+      username: root
+      password: root
+    perf:
+      url: jdbc:mysql://localhost:3306/perf
+      username: root
+      password: root
+
+
