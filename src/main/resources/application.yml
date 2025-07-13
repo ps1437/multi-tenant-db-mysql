@@ -12,9 +12,12 @@ spring:
         generate_statistics: true
   datasource:
     url: jdbc:mysql://localhost:3306/perf?socketTimeout=5000&connectTimeout=3000
+    # socketTimeout: Maximum time (ms) to wait for a response after sending the query
+    # connectTimeout: Maximum time (ms) to establish a connection to the DB server
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+
 
 
 logging:
