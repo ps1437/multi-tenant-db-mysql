@@ -5,11 +5,25 @@ spring:
         hbm2ddl.auto: update
         dialect: org.hibernate.dialect.MySQL8Dialect
         show_sql: true
+        jdbc:
+          batch_size: 1000
+        order_inserts: true
+        order_updates: true
+        generate_statistics: true
   datasource:
-    url: jdbc:mysql://localhost:3306/dev
+    url: jdbc:mysql://localhost:3306/perf?socketTimeout=5000&connectTimeout=3000
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: off
+        type: off
+
 
 multi-tenant:
   enabled : false
@@ -29,5 +43,6 @@ multi-tenant:
       url: jdbc:mysql://localhost:3306/perf
       username: root
       password: root
+
 
 

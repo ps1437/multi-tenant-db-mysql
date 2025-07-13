@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-@ConditionalOnProperty(name = "tenant.enabled", havingValue = "true")
+@ConditionalOnProperty(name = "multi-tenant.enabled", havingValue = "true")
 @Configuration
 @Import({DataSourceConfig.class})
 @EnableAutoConfiguration(exclude = org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration.class)

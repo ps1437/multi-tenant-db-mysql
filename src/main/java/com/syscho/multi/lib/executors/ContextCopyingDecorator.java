@@ -5,7 +5,6 @@ import org.springframework.core.task.TaskDecorator;
 import org.springframework.util.StringUtils;
 
 public class ContextCopyingDecorator implements TaskDecorator {
-
     @Override
     public Runnable decorate(Runnable runnable) {
         var env = TenantContextHolder.getEnv();

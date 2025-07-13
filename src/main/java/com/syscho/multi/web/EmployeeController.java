@@ -1,7 +1,6 @@
 package com.syscho.multi.web;
 
 import com.syscho.multi.lib.filter.TenantContextHolder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,28 +14,29 @@ import java.util.concurrent.Future;
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
+    private final EmployeeRepository employeeRepository;
+    private final ExecutorService contextAwareExecutorService;
 
-    @Autowired
-    private EmployeeRepository repo;
-
-    @Autowired
-    private ExecutorService contextAwareExecutorService;
+    public EmployeeController(EmployeeRepository employeeRepository, ExecutorService contextAwareExecutorService) {
+        this.employeeRepository = employeeRepository;
+        this.contextAwareExecutorService = contextAwareExecutorService;
+    }
 
     @GetMapping
     public List<Employee> getAll() throws ExecutionException, InterruptedException {
-        Future<List<Employee>> submit = contextAwareExecutorService.submit(() -> repo.findAll());
+        Future<List<Employee>> submit = contextAwareExecutorService.submit(() -> employeeRepository.findAll());
         return submit.get();
     }
 
     @GetMapping("/async")
-    public void printAsync() throws ExecutionException, InterruptedException {
+    public void printAsync() {
         runAsync();
     }
 
     @Async
     private void runAsync() {
         System.out.println("current environment :  " + TenantContextHolder.getEnv());
-        repo.findAll().forEach(System.out::println);
+        employeeRepository.findAll().forEach(System.out::println);
     }
 
 }
